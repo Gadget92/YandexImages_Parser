@@ -17,8 +17,11 @@ def saveTodayImage(ImageName, save_path):
         if not os.path.exists(save_path + str(screen)):
             os.makedirs(save_path + str(screen))
         fullpath = os.path.join(save_path + str(screen), ImageName + ".jpg")
-        urllib.request.urlretrieve(url, fullpath)
-        print('Image succesful saved, size: ' + str(screen))
+        if not os.path.exists(fullpath):
+            urllib.request.urlretrieve(url, fullpath)
+            print('Image succesful saved, size: ' + str(screen))
+        else:
+            print('Today this image was saved')
 
 def GetTodayImageName():
     NAME_URL = "https://yandex.by/images/"
