@@ -27,15 +27,17 @@ def GetTodayImageName():
     TodayImageName = soup.find('span', {'class': 'b-501px__name'}).text
     return TodayImageName
 
+def GetSavePath():
+    #Get os type
+    if platform.system() == 'Windows':
+        return SAVE_PATH_WIN
+    else:
+        return SAVE_PATH_NIX
 
-#Get os type
-if platform.system() == 'Windows':
-    path_to_save = SAVE_PATH_WIN
-else:
-    path_to_save = SAVE_PATH_NIX
+def SaveImage():
+    ImageName = GetTodayImageName()
+    if ImageName != "":
+        saveTodayImage(ImageName, GetSavePath())
 
-ImageName = GetTodayImageName()
-
-if ImageName != "":
-    saveTodayImage(ImageName, path_to_save)
-
+if __name__ == "__main__":
+    SaveImage()
